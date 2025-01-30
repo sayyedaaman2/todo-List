@@ -106,4 +106,13 @@ document.addEventListener('DOMContentLoaded', function () {
         // save to localStorage
         localStorage.setItem('tasks', JSON.stringify(taskArray));
     }
+    function loadTasks() {
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+        tasks.forEach(task => {
+            addTask(task.title, task.isCompleted);
+        });
+    }
+
+    loadTasks();
 })
