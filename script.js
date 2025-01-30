@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Add Event Listener to addTaskBtn
     addTaskBtn.addEventListener('click',function(){
         
-
+        if(taskInput.value == "")return null;
         addTask(taskInput.value)
         taskInput.value = "";
     })
@@ -115,4 +115,19 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     loadTasks();
+    const searchInput = document.querySelector('#search-input');
+
+    searchInput.addEventListener('input', function () {
+        const searchTerm = searchInput.value.toLowerCase();
+        const tasks = document.querySelectorAll('.task');
+
+        tasks.forEach(task => {
+            const taskTitle = task.querySelector('p').innerText.toLowerCase();
+            if (taskTitle.includes(searchTerm)) {
+                task.style.display = '';
+            } else {
+                task.style.display = 'none';
+            }
+        });
+    });
 })
